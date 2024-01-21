@@ -13,6 +13,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.pydantic_v1 import BaseModel, Field
 import json
+import argparse
 
 def download_file(url, destination):
     local_filename = url.split('/')[-1]+'.safetensors'
@@ -42,6 +43,10 @@ def download_file(url, destination):
 def generate_seed():
     return random.randint(0, 100) # Generate a random seed between 0 and 100
 
+arg_parser = argparse.ArgumentParser()
+arg_parser.add_argument('prompt', type=str, help='The simple prompt to pass to the commandline')
+
+args = arg_parser.parse_args()
 
 parser = JsonOutputParser()
 
@@ -80,7 +85,7 @@ prompt = PromptTemplate(template=template,
 
 llm_chain = prompt | llm | parser
 
-response = llm_chain.invoke({"request": "I want a photorealistic picture of a sea turtle."})
+response = llm_chain.invoke({"request": args.prompt})
 
 sd_seed = generate_seed()
 
