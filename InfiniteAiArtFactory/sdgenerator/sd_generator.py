@@ -6,6 +6,7 @@ import random
 import requests
 import os
 from tqdm import tqdm
+import time
 
 def download_file(url, destination):
     local_filename = url.split('/')[-1]+'.safetensors'
@@ -60,8 +61,12 @@ def prep_and_generate_images(positive, negative):
                             width=512, 
                             height=512)
 
+
+    timestamp = int(time.time() * 1000)
+
+
     # save the images
     for i, img in enumerate(images):
-        img.save(f"images/image{i+1}.png") # images is a list of PIL.Image
+        img.save(f"images/image#{i+1}@{timestamp}.png") # images is a list of PIL.Image
 
     log.info("Generated images!")
