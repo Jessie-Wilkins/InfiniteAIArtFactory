@@ -38,7 +38,6 @@ def generate_seed():
 def prep_and_generate_images(positive, negative):
     sd_seed = generate_seed()
 
-
     context = sdkit.Context()
 
     # set the path to the model file on the disk (.ckpt or .safetensors file)
