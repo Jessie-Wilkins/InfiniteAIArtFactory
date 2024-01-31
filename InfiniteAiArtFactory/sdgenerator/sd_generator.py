@@ -55,7 +55,7 @@ def prep_and_generate_images(positive, negative):
                             negative_prompt=negative,
                             seed=sd_seed, 
                             sampler_name='dpmpp_2m',
-                            num_outputs=4,
+                            num_outputs=1,
                             num_inference_steps=35,
                             guidance_scale=7,
                             width=512, 

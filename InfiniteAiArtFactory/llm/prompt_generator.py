@@ -15,7 +15,7 @@ def generate_prompt(user_prompt, auto, theme):
         model_file="mistral-7b-instruct-v0.2.Q4_K_M.gguf", 
         model_type="mistral", 
         callbacks=[StreamingStdOutCallbackHandler()],
-        config={"context_length": 10000}
+        config={"context_length": 10000, "gpu_layers": 100}
     )
 
     auto_template = """You are a Stable Diffusion prompt creator. You construct detailed but brief prompts in JSON format based
@@ -33,7 +33,7 @@ def generate_prompt(user_prompt, auto, theme):
     }}    
 
     Note that we go from very generic to a specific subject. 
-    Make sure to always do that: go from a generic them to a specific detailed single subject.
+    Make sure to always do that: go from a generic theme to a specific detailed single subject.
     Please do not just repeat the theme as the main subject; build from there to a specific interesting subject.
 
     Only output the JSON and don't add any commentary or weird separating characters like a series of dashes. Stop once you have outputted the json.
